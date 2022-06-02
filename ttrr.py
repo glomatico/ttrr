@@ -8,7 +8,8 @@ import traceback
 def main():
     phase_files = glob('phase_*.mf')
     if not phase_files:
-        exit("No phase files were found! Make sure to run this program inside Toontown Rewritten's game folder.")
+        print("No phase files were found! Make sure to run this program inside Toontown Rewritten's game folder.")
+        return
     phase_folders = []
     for i in range(len(phase_files)):
         phase_folders.append(phase_files[i][:-3])
@@ -16,7 +17,8 @@ def main():
     for i in range(len(phase_files)):
         response = os.system('multify -x -f' + phase_files[i])
         if response != 0:
-            exit('Failed to run multify to extract phase files! Make sure to install Panda3D SDK before running this program.')
+            print('Failed to run multify to extract phase files! Make sure to install Panda3D SDK before running this program.')
+            return
     print('Cleaning up phase folders...')
     for i in range(len(phase_files)):
         contents = glob(phase_folders[i] + '/*')
